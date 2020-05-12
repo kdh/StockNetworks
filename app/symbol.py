@@ -24,7 +24,7 @@ def get_symbols(exchange = 'LON',full_refresh = False):
     if full_refresh:
         engine.execute("DROP TABLE IF EXISTS symbols")
 
-    url = f"{os.getenv('IEX_ROOT')}/stable/ref-data/exchange/{exchange}/symbols?token={os.getenv('IEX_TOKEN')}"
+    url = f"https://cloud-sse.iexapis.com/stable/ref-data/exchange/{exchange}/symbols?token={os.getenv('IEX_TOKEN')}"
     response = requests.get(url)
     if response.ok:
         df = pd.DataFrame.from_dict(response.json())
